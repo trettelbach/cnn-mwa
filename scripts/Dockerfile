@@ -17,4 +17,3 @@ RUN /opt/conda/bin/conda install \
 	matplotlib \
 	pandas \
         PIL
-
