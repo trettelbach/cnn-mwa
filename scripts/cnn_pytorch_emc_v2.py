@@ -84,11 +84,11 @@ class MyCustomDatasetFits(data.Dataset):
 
 
 # load training set, data augmentation
-fits_train = MyCustomDatasetFits('/media/tabea/FIRENZE/data/labels_train.csv')
+fits_train = MyCustomDatasetFits('/media/tabea/FIRENZE/cnn-mwa/data/labels_train.csv')
 trainloader = torch.utils.data.DataLoader(fits_train, batch_size=BATCH_SIZE, shuffle=True, num_workers=1)
 
 # load testing set, data augmentation
-fits_test = MyCustomDatasetFits('/media/tabea/FIRENZE/data/labels_test.csv')
+fits_test = MyCustomDatasetFits('/media/tabea/FIRENZE/cnn-mwa/data/labels_test.csv')
 testloader = torch.utils.data.DataLoader(fits_test, batch_size=BATCH_SIZE, shuffle=True, num_workers=1)
 
 pictures = []
@@ -292,5 +292,5 @@ show_images(pictures[24:], 3)  #, titles=['1', '2', '3', '4'])
 #plt.show()
 
 print(strftime("%Y-%m-%d %H:%M:%S", gmtime()))
-torch.save(model, '/media/tabea/FIRENZE/mwa_data/model001')
+torch.save(model, '/media/tabea/FIRENZE/cnn-mwa/results/model001')
 
