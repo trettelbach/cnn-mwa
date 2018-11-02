@@ -15,6 +15,6 @@ RUN apt-get update \
 RUN /opt/conda/bin/conda install \
 	astropy \
 	matplotlib \
-	pandas \ 
+	pandas \
         PIL
 
