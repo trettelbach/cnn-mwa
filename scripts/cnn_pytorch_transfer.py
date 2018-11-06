@@ -92,7 +92,7 @@ class ClassifierModule(nn.Module):
         self.net = models.resnet18.classifier
         for p in self.net.parameters():
             p.requires_grad=False
-|
+
     def forward(self,x):
         x1 = self.net(x)
         print 'Passed Thru VGG'
