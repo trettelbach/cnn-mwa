@@ -174,11 +174,15 @@ class CNN(nn.Module):
         out = out.view(out.size(0), -1)
         # fully connected layers at the end (with dropout)
         out = self.fc1(out)
+        # print(out.weight)
+        out = out.view(out.size(0), -1)  # flattening... out.view(BATCH_SIZE, -1)
+
+        out = self.fc1(out)  # fully connected layers at the end
         out = self.dropout(out)
         out = self.fc2(out)
         out = self.fc3(out)
 
-        return out, pictures, weights 
+        return out, pictures, weights
 
 
 
@@ -283,7 +287,10 @@ for epoch in range(EPOCHS):
         loss.backward()
         optimizer.step()
 
-        train_losses.append(float(str(loss.data[0])[7:-18]))
+        try:
+            train_losses.append(float(str(loss.data[0])[7:-18]))
+        except ValueError,err:
+            print "Error: ",err
 
         if (i + 1) % 100 == 0:
             print('TRAINING: Epoch : %d/%d, Iter : %d/%d,  Loss: %.4f' % (epoch + 1, EPOCHS, i + 1, len(fits_train) // BATCH_SIZE, loss.data[0]))
