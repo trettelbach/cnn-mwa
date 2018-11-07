@@ -258,6 +258,8 @@ train_true = []
 train_pred = []
 test_true = []
 test_pred = []
+train_cert = []
+test_cert = []
 
 
 # run the data through the network for x epochs
@@ -298,6 +300,7 @@ for epoch in range(EPOCHS):
         if epoch == (EPOCHS - 1):
             train_true.append(labels.item())
             train_pred.append(max_indices.item())
+            train_cert.append(max_values.item())
 
 
     print('Accuracy epoch %d: %.2f' % (epoch+1, 100 * correct_train / 1047))
@@ -332,21 +335,25 @@ for epoch in range(EPOCHS):
         if epoch == (EPOCHS - 1):
             test_true.append(labels.item())
             test_pred.append(max_indices.item())
+            test_cert.append(max_values.item())
 
     print('Test Accuracy of the model on the %d test images after %d: %.2f %%' % (total, epoch+1, 100 * correct / (total*BATCH_SIZE)))
     test_accs.append(float(str(100*correct/(total*BATCH_SIZE))[7:-18]))
 
-print(train_losses)
-print(test_losses)
-print(train_accs)
-print(test_accs)
+# just some losses, accuracies and prediction results.
+print('train_losses: ', train_losses)
+print('test_losses: ', test_losses)
+print('train_accs: ', train_accs)
+print('test_accs: ', test_accs)
 print('train_true: ', train_true)
 print('train_pred: ', train_pred)
 print('test_true: ', test_true)
 print('test_pred: ', test_pred)
+print('train_cert: ', train_cert)
+print('test_cert: ', test_cert)
 
-show_images(pictures[24:], 3)
-show_images(weights[-24:], 3)
+#show_images(pictures[24:], 3)
+#show_images(weights[-24:], 3)
 
 #print(precision_recall_fscore_support(test_true, test_pred))
 #cm = confusion_matrix(test_true, test_pred)
@@ -356,5 +363,5 @@ show_images(weights[-24:], 3)
 #plt.show()
 
 print(strftime("%Y-%m-%d %H:%M:%S", gmtime()))
-torch.save(model, '/media/tabea/FIRENZE/cnn-mwa/results/model001')
+torch.save(model, '/group/director2096/trettelbach/cnn-mwa/results/model001')
 
