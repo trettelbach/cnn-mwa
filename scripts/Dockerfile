@@ -1,10 +1,5 @@
 FROM pytorch/pytorch:latest
 
-COPY /histograms.py .
-COPY /labels_train.csv .
-COPY /labels_test.csv .
-COPY /cnn_pytorch_emc_v2.py .
-
 RUN apt-get update \
      && apt-get install -y \
         libgl1-mesa-glx \
@@ -12,8 +7,11 @@ RUN apt-get update \
      && apt-get clean all \
      && rm -r /var/lib/apt/lists/*
 
-RUN /opt/conda/bin/conda install \
-	astropy \
-	matplotlib \
-	pandas \
-        PIL
+RUN /opt/conda/bin/conda install --yes \
+    astropy \
+    glob2 \
+    matplotlib \
+    pandas \
+    PIL \
+    scikit-learn \
+    tensorflow
