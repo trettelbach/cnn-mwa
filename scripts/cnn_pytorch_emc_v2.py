@@ -14,11 +14,12 @@ from time import gmtime, strftime
 import mytransforms
 import myplotting
 # from StringIO import StringIO
+from PIL import Image
 
 # Hyperparameter variables
 NLABEL = int(4)
 BATCH_SIZE = 1
-EPOCHS = 3
+EPOCHS = 2
 INIT_LR = 5e-7
 
 # check if GPU available
@@ -32,7 +33,7 @@ print(strftime("%Y-%m-%d %H:%M:%S", gmtime()))
 
 # choose data augmentation elements
 transform = transforms.Compose([
-    mytransforms.CenterCropFits(800),
+    # mytransforms.CenterCropFits(800),
     # CutRangeFits(0),
     mytransforms.RandomHorizontalFlipFits(),
     mytransforms.RandomVerticalFlipFits(),
@@ -361,6 +362,18 @@ print('test_cert: ', test_cert)
 #plt.figure()
 #plot_confusion_matrix(cm, classes=class_names, normalize=True, title='Confusion matrix, with normalization')
 #plt.show()
+
+i = 0
+for img in weights:
+    pic = Image.fromarray(img, 'L')
+    pic.save('/group/director2096/trettelbach/filters/filter' + str(i) + '.png')
+    i += 1
+
+i = 0
+for img in pictures:
+    pic = Image.fromarray(img, 'L')
+    pic.save('/group/director2096/trettelbach/feature_maps/fmap' + str(i) + '.png')
+    i += 1
 
 print(strftime("%Y-%m-%d %H:%M:%S", gmtime()))
 torch.save(model, '/group/director2096/trettelbach/cnn-mwa/results/model001')
